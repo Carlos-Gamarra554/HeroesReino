@@ -18,19 +18,20 @@ public class Asesino extends Heroe{
             System.out.println("No puedes atacar, estás muerto");
         } else {
             if (tirada == 1) {
-                System.out.println("Pifia! Te han descubierto y tienes que huir!");
+                System.out.println("Has sacado un 1 y has pifiado! Te tropiezas y te haces 15 puntos de daño!");
+                this.vida -= 15;
             } else if (tirada > 1 && tirada <= 10) {
-                System.out.println("Intentas clavar el cuchillo pero no tienes suerte!");
+                System.out.println("Has sacado un " + tirada + "! Intentas clavar el cuchillo pero te pillan, debes huir!");
             } else if (tirada > 10 && tirada < 20) {
-                System.out.println("Has atacado al enemigo! Has infligido " + armaEspecial.getDaño()*tirada + " puntos de daño");
+                System.out.println("Has sacado un " + tirada + " y atacas al enemigo! Le has infligido " + armaEspecial.getDaño()*tirada + " puntos de daño");
             } else if (tirada == 20) {
-                System.out.println("Crítico! Has asesinado al enemigo");
+                System.out.println("Has sacado un 20! Has asesinado al enemigo");
             }
         }
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", Sigilo=" + sigilo + "]";
+        return super.toString() + ", Tipo: Asesino, Sigilo=" + sigilo + "]";
     }
 }

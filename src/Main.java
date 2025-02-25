@@ -10,9 +10,15 @@ public class Main {
     static ArrayList<ArmaEspecial> arsenal = new ArrayList();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         ArmaEspecial espada = new ArmaEspecial("Scalibur", 34);
         arsenal.add(espada);
+        ArmaEspecial rayo = new ArmaEspecial("Rayo Cegador", 12);
+        arsenal.add(rayo);
+
         Heroe heroes = new Heroe("Heroe", 1, 100, espada);
+        gremio.add(new Guerrero("Germán", 14,100,36, espada));
+        gremio.add(new Mago("Daniel",23,150,400, rayo));
 
         int opcion = -1;
         menu();
@@ -41,15 +47,17 @@ public class Main {
 
                     case 4:
                         System.out.println("Vamos a buscar un héroe por su nombre!");
+                        sc.nextLine();
                         System.out.print("Primero introduce su nombre: ");
                         String nombre = sc.nextLine();
 
-                        if (heroes.findHeroe(nombre, gremio) == true) {
+                        if (heroes.findHeroe(nombre, gremio)) {
                             System.out.println("Hemos encontrado al héroe! Sus stats son:");
                             heroes.toString();
                         } else {
                             System.out.println("No existe el héroe que buscas.");
                         }
+                        System.out.println("------------------------------------------------");
                         break;
 
                     case 5:
@@ -57,7 +65,7 @@ public class Main {
                         break;
 
                     case 6:
-                        espada.printWeapons();
+                        espada.printWeapons(arsenal);
                         break;
 
                     case 7:
@@ -80,29 +88,43 @@ public class Main {
 
     public static void play() {
         Scanner sc = new Scanner(System.in);
-        printGremio();
 
-        System.out.print("Introduce el nombre del héroe con el que quieras jugar:");
+        if (gremio.isEmpty()) {
+            System.out.println("No hay héroes con los que jugar.");
+            return;
+        }
+
+        printGremio();
+        System.out.print("Introduce el nombre del héroe con el que quieras jugar: ");
         String nombre = sc.nextLine();
 
+        Heroe seleccionado = null;
         for (Heroe h : gremio) {
             if (h.getNombre().equalsIgnoreCase(nombre)) {
-                if (h instanceof Guerrero) {
-                    System.out.println(nombre + " va a realizar un ataque! Tira un dado de 20");
-                    ((Guerrero) h).atacar();
-                } else if (h instanceof Mago) {
-                    System.out.println(nombre + " va a lanzar un hechizo! Tira un dado de 20");
-                    ((Mago) h).hechizar();
-                } else if (h instanceof Asesino) {
-                    System.out.println(nombre + " va realizar una ataque sigiloso! Tira un dado de 20");
-                    ((Asesino) h).asesinar();
-                } else if (h instanceof Arquero){
-                    System.out.println(nombre + " va a efectuar un disparo! Tira un dado de 20");
-                    ((Arquero) h).disparar();
-                }
+                seleccionado = h;
+                break;
             }
         }
-    }
+
+        if (seleccionado == null) {
+            System.out.println("No existe un héroe con ese nombre.");
+            System.out.println("------------------------------------------------");
+            return;
+        }
+                    if (seleccionado instanceof Guerrero) {
+                        System.out.println(nombre + " va a realizar un ataque! Tira un dado de 20");
+                        ((Guerrero) seleccionado).atacar();
+                    } else if (seleccionado instanceof Mago) {
+                        System.out.println(nombre + " va a lanzar un hechizo! Tira un dado de 20");
+                        ((Mago) seleccionado).hechizar();
+                    } else if (seleccionado instanceof Asesino) {
+                        System.out.println(nombre + " va realizar una ataque sigiloso! Tira un dado de 20");
+                        ((Asesino) seleccionado).asesinar();
+                    } else if (seleccionado instanceof Arquero) {
+                        System.out.println(nombre + " va a efectuar un disparo! Tira un dado de 20");
+                        ((Arquero) seleccionado).disparar();
+                    }
+                }
 
     public static void menu() {
         System.out.println("1. Añadir un nuevo héroe\n" +

@@ -10,8 +10,11 @@ public class Mago extends Heroe{
         this.mana = mana;
     }
 
+    public int getMana() {
+        return mana;
+    }
+
     public void hechizar() {
-        System.out.println("Tira un dado de 20 para lanzar un hechizo!");
         int tirada = tirarDado();
 
         if (vida < 1){
@@ -20,27 +23,23 @@ public class Mago extends Heroe{
             System.out.println("No tienes suficiente mana para lanzar el hechizo!");
         } else {
             if (tirada == 1) {
-                System.out.println("Pifia! Te lanzas un hechizo a tí mismo y te haces 100 puntos de daño!");
+                System.out.println("Has sacado un 1 y has pifiado! Te lanzas un hechizo a tí mismo y te haces 25 puntos de daño!");
+                this.vida -= 25;
             } else if (tirada > 1 && tirada <= 10) {
-                System.out.println("Intentas lanzar un hechizo pero no eres capaz de conseguirlo!");
+                System.out.println("Has sacado un " + tirada + "! Intentas lanzar un hechizo pero no eres capaz de conseguirlo!");
             } else if (tirada > 10 && tirada < 20) {
-                System.out.println("Has lanzado un hechizo! Has infligido " + armaEspecial.getDaño()*tirada + " puntos de daño y has consumido 100 de maná");
+                System.out.println("Has sacado un " + tirada + " y lanzas un hechizo! Has infligido " + armaEspecial.getDaño()*tirada + " puntos de daño y has consumido 100 de maná");
+                this.mana -= 100;
             } else if (tirada == 20) {
-                System.out.println("Crítico! Has reducido al enemigo a cenizas y gastas 100 de maná");
+                System.out.println("Has sacado un 20! Has reducido al enemigo a cenizas y gastas 100 de maná");
+                this.mana -= 100;
             }
         }
-    }
-
-    public void regenerarMana() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("¿Cuánto tiempo vas a descansar?(min): ");
-        int tiempo = sc.nextInt();
-
-        System.out.println("Has regenerado " + tiempo*25 + " puntos de maná");
+        System.out.println("------------------------------------------------");
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", Maná: " + mana + "]";
+        return super.toString() + ", Tipo: Mago, Maná: " + mana + "]";
     }
 }

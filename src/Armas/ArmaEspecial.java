@@ -20,7 +20,7 @@ public class ArmaEspecial {
         return daño;
     }
 
-    public void printWeapons() {
+    public void printWeapons(ArrayList<ArmaEspecial> ar) {
         if (ar.isEmpty()) {
             System.out.println("No hay armas disponibles.");
             System.out.println("------------------------------------------------");
@@ -67,7 +67,7 @@ public class ArmaEspecial {
         }
 
         Scanner sc = new Scanner(System.in);
-        printWeapons();
+        printWeapons(ar);
         System.out.print("Selecciona un arma especial para tu héroe: ");
         int arma = 0;
 

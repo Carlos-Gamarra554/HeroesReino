@@ -55,7 +55,7 @@ public class Heroe {
             System.out.println("Error. Solo debes introducir números entre 1 y 4.");
             return;
         }
-        System.out.println("------------------------------------");
+        System.out.println("------------------------------------------------");
 
         System.out.print("Nombre del héroe: ");
         String nombre = sc.nextLine();
@@ -153,8 +153,6 @@ public class Heroe {
 
     @Override
     public String toString() {
-        int index = 0;
-        index ++;
-        return  index + 1 + ". " + nombre + "[Nivel:" + nivel + ", Vida: " + vida + ", Arma Especial: " + armaEspecial.toString();
+        return "-" + nombre + " [Nivel:" + nivel + ", Vida: " + vida + ", Arma Especial: " + armaEspecial.toString();
     }
 }

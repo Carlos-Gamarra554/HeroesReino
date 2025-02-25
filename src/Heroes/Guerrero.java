@@ -31,6 +31,6 @@ public class Guerrero extends Heroe{
 
     @Override
     public String toString() {
-        return super.toString() + ", Fuerza: " + fuerza + "]";
+        return super.toString() + ", Tipo: Guerrero, Fuerza: " + fuerza + "]";
     }
 }
